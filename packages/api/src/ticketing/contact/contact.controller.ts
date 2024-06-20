@@ -37,7 +37,7 @@ export class ContactController {
   }
 
   @ApiOperation({
-    operationId: 'getTicketingContacts',
+    operationId: 'list',
     summary: 'List all Contacts',
   })
   @ApiHeader({
@@ -50,7 +50,7 @@ export class ContactController {
   @UseGuards(ApiKeyAuthGuard)
   @Get()
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
-  async getContacts(
+  async list(
     @Headers('x-connection-token') connection_token: string,
     @Query() query: FetchObjectsQueryDto,
   ) {
@@ -59,11 +59,11 @@ export class ContactController {
         await this.connectionUtils.getConnectionMetadataFromConnectionToken(
           connection_token,
         );
-      const { remote_data, pageSize, cursor } = query;
+      const { remote_data, limit, cursor } = query;
       return this.contactService.getContacts(
         remoteSource,
         linkedUserId,
-        pageSize,
+        limit,
         remote_data,
         cursor,
       );
@@ -73,7 +73,7 @@ export class ContactController {
   }
 
   @ApiOperation({
-    operationId: 'getTicketingContact',
+    operationId: 'retrieve',
     summary: 'Retrieve a Contact',
     description: 'Retrieve a contact from any connected Ticketing software',
   })
@@ -93,7 +93,7 @@ export class ContactController {
   @ApiCustomResponse(UnifiedContactOutput)
   @Get(':id')
   @UseGuards(ApiKeyAuthGuard)
-  getContact(
+  retrieve(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {

@@ -37,7 +37,7 @@ export class UserController {
   }
 
   @ApiOperation({
-    operationId: 'getTicketingUsers',
+    operationId: 'list',
     summary: 'List a batch of Users',
   })
   @ApiHeader({
@@ -50,7 +50,7 @@ export class UserController {
   @UseGuards(ApiKeyAuthGuard)
   @Get()
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
-  async getUsers(
+  async list(
     @Headers('x-connection-token') connection_token: string,
     @Query() query: FetchObjectsQueryDto,
   ) {
@@ -58,19 +58,19 @@ export class UserController {
       await this.connectionUtils.getConnectionMetadataFromConnectionToken(
         connection_token,
       );
-    const { remote_data, pageSize, cursor } = query;
+    const { remote_data, limit, cursor } = query;
 
     return this.userService.getUsers(
       remoteSource,
       linkedUserId,
-      pageSize,
+      limit,
       remote_data,
       cursor,
     );
   }
 
   @ApiOperation({
-    operationId: 'getTicketingUser',
+    operationId: 'retrieve',
     summary: 'Retrieve a User',
     description: 'Retrieve a user from any connected Ticketing software',
   })
@@ -90,7 +90,7 @@ export class UserController {
   @ApiCustomResponse(UnifiedUserOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  getUser(
+  retrieve(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
