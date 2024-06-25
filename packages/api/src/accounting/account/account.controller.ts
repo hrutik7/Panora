@@ -37,7 +37,7 @@ export class AccountController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getAccountingAccounts',
     summary: 'List a batch of Accounts',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class AccountController {
   @ApiCustomResponse(UnifiedAccountOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getAccounts(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class AccountController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getAccountingAccount',
     summary: 'Retrieve a Account',
     description: 'Retrieve a account from any connected Accounting software',
   })
@@ -96,7 +96,7 @@ export class AccountController {
   @ApiCustomResponse(UnifiedAccountOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getAccount(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -104,7 +104,7 @@ export class AccountController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addAccount',
     summary: 'Create a Account',
     description: 'Create a account in any supported Accounting software',
   })
@@ -125,7 +125,7 @@ export class AccountController {
   @ApiCustomResponse(UnifiedAccountOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addAccount(
     @Body() unifiedAccountData: UnifiedAccountInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

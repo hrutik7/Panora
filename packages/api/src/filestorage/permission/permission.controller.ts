@@ -37,7 +37,7 @@ export class PermissionController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getPermissions',
     summary: 'List a batch of Permissions',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class PermissionController {
   @ApiCustomResponse(UnifiedPermissionOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getPermissions(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class PermissionController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getPermission',
     summary: 'Retrieve a Permission',
     description:
       'Retrieve a permission from any connected Filestorage software',
@@ -97,7 +97,7 @@ export class PermissionController {
   @ApiCustomResponse(UnifiedPermissionOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getPermission(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class PermissionController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addPermission',
     summary: 'Create a Permission',
     description: 'Create a permission in any supported Filestorage software',
   })
@@ -126,7 +126,7 @@ export class PermissionController {
   @ApiCustomResponse(UnifiedPermissionOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addPermission(
     @Body() unifiedPermissionData: UnifiedPermissionInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

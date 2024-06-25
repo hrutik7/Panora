@@ -34,7 +34,7 @@ export class OfferController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getOffers',
     summary: 'List a batch of Offers',
   })
   @ApiHeader({
@@ -52,7 +52,7 @@ export class OfferController {
   @ApiCustomResponse(UnifiedOfferOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getOffers(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -72,7 +72,7 @@ export class OfferController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getOffer',
     summary: 'Retrieve a Offer',
     description: 'Retrieve a offer from any connected Ats software',
   })
@@ -91,7 +91,7 @@ export class OfferController {
   @ApiCustomResponse(UnifiedOfferOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getOffer(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -99,7 +99,7 @@ export class OfferController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addOffer',
     summary: 'Create a Offer',
     description: 'Create a offer in any supported Ats software',
   })
@@ -119,7 +119,7 @@ export class OfferController {
   @ApiCustomResponse(UnifiedOfferOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addOffer(
     @Body() unifiedOfferData: UnifiedOfferInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

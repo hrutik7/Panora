@@ -44,7 +44,7 @@ export class CompanyController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getCompanies',
     summary: 'List a batch of Companies',
   })
   @ApiHeader({
@@ -57,7 +57,7 @@ export class CompanyController {
   @UseGuards(ApiKeyAuthGuard)
   @Get()
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
-  async list(
+  async getCompanies(
     @Headers('x-connection-token') connection_token: string,
     @Query() query: FetchObjectsQueryDto,
   ) {
@@ -80,7 +80,7 @@ export class CompanyController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getCrmCompany',
     summary: 'Retrieve a Company',
     description: 'Retrieve a company from any connected Crm software',
   })
@@ -99,7 +99,7 @@ export class CompanyController {
   @ApiCustomResponse(UnifiedCompanyOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getCompany(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -107,7 +107,7 @@ export class CompanyController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addCrmCompany',
     summary: 'Create a Company',
     description: 'Create a company in any supported Crm software',
   })
@@ -127,7 +127,7 @@ export class CompanyController {
   @ApiCustomResponse(UnifiedCompanyOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addCompany(
     @Body() unifiedCompanyData: UnifiedCompanyInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
@@ -146,5 +146,19 @@ export class CompanyController {
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  @ApiOperation({
+    operationId: 'updateCompany',
+    summary: 'Update a Company',
+  })
+  @ApiCustomResponse(UnifiedCompanyOutput)
+  @UseGuards(ApiKeyAuthGuard)
+  @Patch()
+  updateCompany(
+    @Query('id') id: string,
+    @Body() updateCompanyData: Partial<UnifiedCompanyInput>,
+  ) {
+    return this.companyService.updateCompany(id, updateCompanyData);
   }
 }

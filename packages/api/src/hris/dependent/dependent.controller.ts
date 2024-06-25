@@ -37,7 +37,7 @@ export class DependentController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getDependents',
     summary: 'List a batch of Dependents',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class DependentController {
   @ApiCustomResponse(UnifiedDependentOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getDependents(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class DependentController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getDependent',
     summary: 'Retrieve a Dependent',
     description: 'Retrieve a dependent from any connected Hris software',
   })
@@ -94,7 +94,7 @@ export class DependentController {
   @ApiCustomResponse(UnifiedDependentOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getDependent(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class DependentController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addDependent',
     summary: 'Create a Dependent',
     description: 'Create a dependent in any supported Hris software',
   })
@@ -122,7 +122,7 @@ export class DependentController {
   @ApiCustomResponse(UnifiedDependentOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addDependent(
     @Body() unifiedDependentData: UnifiedDependentInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

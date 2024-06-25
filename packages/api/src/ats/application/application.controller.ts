@@ -37,7 +37,7 @@ export class ApplicationController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getApplications',
     summary: 'List a batch of Applications',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class ApplicationController {
   @ApiCustomResponse(UnifiedApplicationOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getApplications(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class ApplicationController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getApplication',
     summary: 'Retrieve a Application',
     description: 'Retrieve a application from any connected Ats software',
   })
@@ -94,7 +94,7 @@ export class ApplicationController {
   @ApiCustomResponse(UnifiedApplicationOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getApplication(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class ApplicationController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addApplication',
     summary: 'Create a Application',
     description: 'Create a application in any supported Ats software',
   })
@@ -122,7 +122,7 @@ export class ApplicationController {
   @ApiCustomResponse(UnifiedApplicationOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addApplication(
     @Body() unifiedApplicationData: UnifiedApplicationInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

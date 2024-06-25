@@ -37,7 +37,7 @@ export class TaxRateController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getTaxRates',
     summary: 'List a batch of TaxRates',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class TaxRateController {
   @ApiCustomResponse(UnifiedTaxRateOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getTaxRates(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class TaxRateController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getTaxRate',
     summary: 'Retrieve a TaxRate',
     description: 'Retrieve a taxrate from any connected Accounting software',
   })
@@ -96,7 +96,7 @@ export class TaxRateController {
   @ApiCustomResponse(UnifiedTaxRateOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getTaxRate(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -104,7 +104,7 @@ export class TaxRateController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addTaxRate',
     summary: 'Create a TaxRate',
     description: 'Create a taxrate in any supported Accounting software',
   })
@@ -125,7 +125,7 @@ export class TaxRateController {
   @ApiCustomResponse(UnifiedTaxRateOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addTaxRate(
     @Body() unifiedTaxRateData: UnifiedTaxRateInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

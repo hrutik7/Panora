@@ -306,7 +306,7 @@ private connectionUtils: ConnectionUtils
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'get${ObjectCap}s',
     summary: 'List a batch of ${ObjectCap}s',
   })
    @ApiHeader({
@@ -325,7 +325,7 @@ private connectionUtils: ConnectionUtils
   @ApiCustomResponse(Unified${ObjectCap}Output)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async get${ObjectCap}s(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -345,7 +345,7 @@ private connectionUtils: ConnectionUtils
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'get${ObjectCap}',
     summary: 'Retrieve a ${ObjectCap}',
     description: 'Retrieve a ${objectType} from any connected ${VerticalCap} software',
   })
@@ -365,7 +365,7 @@ private connectionUtils: ConnectionUtils
   @ApiCustomResponse(Unified${ObjectCap}Output)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  get${ObjectCap}(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -373,7 +373,7 @@ private connectionUtils: ConnectionUtils
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'add${ObjectCap}',
     summary: 'Create a ${ObjectCap}',
     description: 'Create a ${objectType} in any supported ${VerticalCap} software',
   })
@@ -394,7 +394,7 @@ private connectionUtils: ConnectionUtils
   @ApiCustomResponse(Unified${ObjectCap}Output)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async add${ObjectCap}(
     @Body() unified${ObjectCap}Data: Unified${ObjectCap}Input,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
@@ -414,15 +414,15 @@ private connectionUtils: ConnectionUtils
       throw new Error(error);
     }
   }
-
+  
   @ApiOperation({
-    operationId: 'update',
+    operationId: 'update${ObjectCap}',
     summary: 'Update a ${ObjectCap}',
   })
   @ApiCustomResponse(Unified${ObjectCap}Output)
   //@UseGuards(ApiKeyAuthGuard)
   @Patch()
-  update$(
+  update${ObjectCap}(
     @Query('id') id: string,
     @Body() update${ObjectCap}Data: Partial<Unified${ObjectCap}Input>,
   ) {

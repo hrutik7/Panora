@@ -34,7 +34,7 @@ export class JobController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getJobs',
     summary: 'List a batch of Jobs',
   })
   @ApiHeader({
@@ -52,7 +52,7 @@ export class JobController {
   @ApiCustomResponse(UnifiedJobOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getJobs(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -68,7 +68,7 @@ export class JobController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getJob',
     summary: 'Retrieve a Job',
     description: 'Retrieve a job from any connected Ats software',
   })
@@ -87,15 +87,12 @@ export class JobController {
   @ApiCustomResponse(UnifiedJobOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
-    @Param('id') id: string,
-    @Query('remote_data') remote_data?: boolean,
-  ) {
+  getJob(@Param('id') id: string, @Query('remote_data') remote_data?: boolean) {
     return this.jobService.getJob(id, remote_data);
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addJob',
     summary: 'Create a Job',
     description: 'Create a job in any supported Ats software',
   })
@@ -115,7 +112,7 @@ export class JobController {
   @ApiCustomResponse(UnifiedJobOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addJob(
     @Body() unifiedJobData: UnifiedJobInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

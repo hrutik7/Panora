@@ -41,7 +41,7 @@ export class TaskController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getTasks',
     summary: 'List a batch of Tasks',
   })
   @ApiHeader({
@@ -54,7 +54,7 @@ export class TaskController {
   @UseGuards(ApiKeyAuthGuard)
   @Get()
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
-  async list(
+  async getTasks(
     @Headers('x-connection-token') connection_token: string,
     @Query() query: FetchObjectsQueryDto,
   ) {
@@ -78,7 +78,7 @@ export class TaskController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getTask',
     summary: 'Retrieve a Task',
     description: 'Retrieve a task from any connected Crm software',
   })
@@ -97,7 +97,7 @@ export class TaskController {
   @ApiCustomResponse(UnifiedTaskOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getTask(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class TaskController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addTask',
     summary: 'Create a Task',
     description: 'Create a task in any supported Crm software',
   })
@@ -125,7 +125,7 @@ export class TaskController {
   @ApiCustomResponse(UnifiedTaskOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addTask(
     @Body() unifiedTaskData: UnifiedTaskInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
@@ -144,18 +144,5 @@ export class TaskController {
     } catch (error) {
       throw new Error(error);
     }
-  }
-  @ApiOperation({
-    operationId: 'update',
-    summary: 'Update a Task',
-  })
-  @ApiCustomResponse(UnifiedTaskOutput)
-  @UseGuards(ApiKeyAuthGuard)
-  @Patch()
-  update(
-    @Query('id') id: string,
-    @Body() updateTaskData: Partial<UnifiedTaskInput>,
-  ) {
-    return this.taskService.updateTask(id, updateTaskData);
   }
 }

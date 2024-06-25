@@ -37,7 +37,7 @@ export class CandidateController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getCandidates',
     summary: 'List a batch of Candidates',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class CandidateController {
   @ApiCustomResponse(UnifiedCandidateOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getCandidates(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class CandidateController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getCandidate',
     summary: 'Retrieve a Candidate',
     description: 'Retrieve a candidate from any connected Ats software',
   })
@@ -94,7 +94,7 @@ export class CandidateController {
   @ApiCustomResponse(UnifiedCandidateOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getCandidate(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class CandidateController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addCandidate',
     summary: 'Create a Candidate',
     description: 'Create a candidate in any supported Ats software',
   })
@@ -122,7 +122,7 @@ export class CandidateController {
   @ApiCustomResponse(UnifiedCandidateOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addCandidate(
     @Body() unifiedCandidateData: UnifiedCandidateInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

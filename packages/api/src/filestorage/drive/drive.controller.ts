@@ -34,7 +34,7 @@ export class DriveController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getDrives',
     summary: 'List a batch of Drives',
   })
   @ApiHeader({
@@ -53,7 +53,7 @@ export class DriveController {
   @ApiCustomResponse(UnifiedDriveOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getDrives(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -73,7 +73,7 @@ export class DriveController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getDrive',
     summary: 'Retrieve a Drive',
     description: 'Retrieve a drive from any connected Filestorage software',
   })
@@ -93,7 +93,7 @@ export class DriveController {
   @ApiCustomResponse(UnifiedDriveOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getDrive(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -101,7 +101,7 @@ export class DriveController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addDrive',
     summary: 'Create a Drive',
     description: 'Create a drive in any supported Filestorage software',
   })
@@ -122,7 +122,7 @@ export class DriveController {
   @ApiCustomResponse(UnifiedDriveOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addDrive(
     @Body() unifiedDriveData: UnifiedDriveInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

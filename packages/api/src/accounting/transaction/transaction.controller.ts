@@ -37,7 +37,7 @@ export class TransactionController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getTransactions',
     summary: 'List a batch of Transactions',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class TransactionController {
   @ApiCustomResponse(UnifiedTransactionOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getTransactions(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class TransactionController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getTransaction',
     summary: 'Retrieve a Transaction',
     description:
       'Retrieve a transaction from any connected Accounting software',
@@ -97,7 +97,7 @@ export class TransactionController {
   @ApiCustomResponse(UnifiedTransactionOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getTransaction(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class TransactionController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addTransaction',
     summary: 'Create a Transaction',
     description: 'Create a transaction in any supported Accounting software',
   })
@@ -126,7 +126,7 @@ export class TransactionController {
   @ApiCustomResponse(UnifiedTransactionOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addTransaction(
     @Body() unifiedTransactionData: UnifiedTransactionInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

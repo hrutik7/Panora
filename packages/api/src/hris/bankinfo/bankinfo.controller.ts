@@ -37,7 +37,7 @@ export class BankinfoController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getBankinfos',
     summary: 'List a batch of Bankinfos',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class BankinfoController {
   @ApiCustomResponse(UnifiedBankInfoOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getBankinfos(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class BankinfoController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getBankinfo',
     summary: 'Retrieve a Bankinfo',
     description: 'Retrieve a bankinfo from any connected Hris software',
   })
@@ -94,7 +94,7 @@ export class BankinfoController {
   @ApiCustomResponse(UnifiedBankInfoOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getBankinfo(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class BankinfoController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addBankinfo',
     summary: 'Create a Bankinfo',
     description: 'Create a bankinfo in any supported Hris software',
   })
@@ -122,7 +122,7 @@ export class BankinfoController {
   @ApiCustomResponse(UnifiedBankInfoOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addBankinfo(
     @Body() unifiedBankinfoData: UnifiedBankInfoInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

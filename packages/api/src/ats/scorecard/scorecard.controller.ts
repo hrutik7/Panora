@@ -37,7 +37,7 @@ export class ScoreCardController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getScoreCards',
     summary: 'List a batch of ScoreCards',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class ScoreCardController {
   @ApiCustomResponse(UnifiedScoreCardOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getScoreCards(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class ScoreCardController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getScoreCard',
     summary: 'Retrieve a ScoreCard',
     description: 'Retrieve a scorecard from any connected Ats software',
   })
@@ -94,7 +94,7 @@ export class ScoreCardController {
   @ApiCustomResponse(UnifiedScoreCardOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getScoreCard(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class ScoreCardController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addScoreCard',
     summary: 'Create a ScoreCard',
     description: 'Create a scorecard in any supported Ats software',
   })
@@ -122,7 +122,7 @@ export class ScoreCardController {
   @ApiCustomResponse(UnifiedScoreCardOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addScoreCard(
     @Body() unifiedScoreCardData: UnifiedScoreCardInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

@@ -387,7 +387,6 @@ export const CONNECTORS_METADATA: ProvidersConfig = {
           apiUrl: (domain) => `https://${domain}.gorgias.com/api`,
           authBaseUrl: (domain) => `https://${domain}.com/connections/gorgias/oauth/install`,
         },
-        active: false,
         options: {
           company_subdomain: true,
         },
@@ -2733,7 +2732,7 @@ export const CONNECTORS_METADATA: ProvidersConfig = {
         },
         logoPath: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png',
         description: 'Sync & Create contacts, deals, companies, notes, engagements, stages, tasks and users',
-        active: true,
+        active: false,
         authStrategy: {
           strategy: AuthStrategy.oauth2
         }

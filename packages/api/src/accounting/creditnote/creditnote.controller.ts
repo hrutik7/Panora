@@ -37,7 +37,7 @@ export class CreditNoteController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getCreditNotes',
     summary: 'List a batch of CreditNotes',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class CreditNoteController {
   @ApiCustomResponse(UnifiedCreditNoteOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getCreditNotes(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class CreditNoteController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getCreditNote',
     summary: 'Retrieve a CreditNote',
     description: 'Retrieve a creditnote from any connected Accounting software',
   })
@@ -96,7 +96,7 @@ export class CreditNoteController {
   @ApiCustomResponse(UnifiedCreditNoteOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getCreditNote(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -104,7 +104,7 @@ export class CreditNoteController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addCreditNote',
     summary: 'Create a CreditNote',
     description: 'Create a creditnote in any supported Accounting software',
   })
@@ -125,7 +125,7 @@ export class CreditNoteController {
   @ApiCustomResponse(UnifiedCreditNoteOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addCreditNote(
     @Body() unifiedCreditNoteData: UnifiedCreditNoteInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

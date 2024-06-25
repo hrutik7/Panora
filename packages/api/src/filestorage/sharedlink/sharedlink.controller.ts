@@ -38,7 +38,7 @@ export class SharedlinkController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getSharedlinks',
     summary: 'List a batch of Sharedlinks',
   })
   @ApiHeader({
@@ -57,7 +57,7 @@ export class SharedlinkController {
   @ApiCustomResponse(UnifiedSharedLinkOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getSharedlinks(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -77,7 +77,7 @@ export class SharedlinkController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getSharedlink',
     summary: 'Retrieve a Sharedlink',
     description:
       'Retrieve a sharedlink from any connected Filestorage software',
@@ -98,7 +98,7 @@ export class SharedlinkController {
   @ApiCustomResponse(UnifiedSharedLinkOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getSharedlink(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -106,7 +106,7 @@ export class SharedlinkController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addSharedlink',
     summary: 'Create a Sharedlink',
     description: 'Create a sharedlink in any supported Filestorage software',
   })
@@ -127,7 +127,7 @@ export class SharedlinkController {
   @ApiCustomResponse(UnifiedSharedLinkOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addSharedlink(
     @Body() unifiedSharedlinkData: UnifiedSharedLinkInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

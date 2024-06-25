@@ -37,7 +37,7 @@ export class JobInterviewStageController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getJobInterviewStages',
     summary: 'List a batch of JobInterviewStages',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class JobInterviewStageController {
   @ApiCustomResponse(UnifiedJobInterviewStageOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getJobInterviewStages(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class JobInterviewStageController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getJobInterviewStage',
     summary: 'Retrieve a JobInterviewStage',
     description: 'Retrieve a jobinterviewstage from any connected Ats software',
   })
@@ -94,7 +94,7 @@ export class JobInterviewStageController {
   @ApiCustomResponse(UnifiedJobInterviewStageOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getJobInterviewStage(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class JobInterviewStageController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addJobInterviewStage',
     summary: 'Create a JobInterviewStage',
     description: 'Create a jobinterviewstage in any supported Ats software',
   })
@@ -122,7 +122,7 @@ export class JobInterviewStageController {
   @ApiCustomResponse(UnifiedJobInterviewStageOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addJobInterviewStage(
     @Body() unifiedJobInterviewStageData: UnifiedJobInterviewStageInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

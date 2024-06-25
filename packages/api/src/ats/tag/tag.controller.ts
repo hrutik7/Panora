@@ -34,7 +34,7 @@ export class TagController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getAtsTags',
     summary: 'List a batch of Tags',
   })
   @ApiHeader({
@@ -52,7 +52,7 @@ export class TagController {
   @ApiCustomResponse(UnifiedTagOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getTags(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -68,7 +68,7 @@ export class TagController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getAtsTag',
     summary: 'Retrieve a Tag',
     description: 'Retrieve a tag from any connected Ats software',
   })
@@ -87,15 +87,12 @@ export class TagController {
   @ApiCustomResponse(UnifiedTagOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
-    @Param('id') id: string,
-    @Query('remote_data') remote_data?: boolean,
-  ) {
+  getTag(@Param('id') id: string, @Query('remote_data') remote_data?: boolean) {
     return this.tagService.getTag(id, remote_data);
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addTag',
     summary: 'Create a Tag',
     description: 'Create a tag in any supported Ats software',
   })
@@ -115,7 +112,7 @@ export class TagController {
   @ApiCustomResponse(UnifiedTagOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addTag(
     @Body() unifiedTagData: UnifiedTagInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

@@ -37,7 +37,7 @@ export class EmploymentController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getEmployments',
     summary: 'List a batch of Employments',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class EmploymentController {
   @ApiCustomResponse(UnifiedEmploymentOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getEmployments(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class EmploymentController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getEmployment',
     summary: 'Retrieve a Employment',
     description: 'Retrieve a employment from any connected Hris software',
   })
@@ -94,7 +94,7 @@ export class EmploymentController {
   @ApiCustomResponse(UnifiedEmploymentOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getEmployment(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class EmploymentController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addEmployment',
     summary: 'Create a Employment',
     description: 'Create a employment in any supported Hris software',
   })
@@ -122,7 +122,7 @@ export class EmploymentController {
   @ApiCustomResponse(UnifiedEmploymentOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addEmployment(
     @Body() unifiedEmploymentData: UnifiedEmploymentInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

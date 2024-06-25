@@ -37,7 +37,7 @@ export class EmployeeController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getEmployees',
     summary: 'List a batch of Employees',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class EmployeeController {
   @ApiCustomResponse(UnifiedEmployeeOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getEmployees(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class EmployeeController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getEmployee',
     summary: 'Retrieve a Employee',
     description: 'Retrieve a employee from any connected Hris software',
   })
@@ -94,7 +94,7 @@ export class EmployeeController {
   @ApiCustomResponse(UnifiedEmployeeOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getEmployee(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class EmployeeController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addEmployee',
     summary: 'Create a Employee',
     description: 'Create a employee in any supported Hris software',
   })
@@ -122,7 +122,7 @@ export class EmployeeController {
   @ApiCustomResponse(UnifiedEmployeeOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addEmployee(
     @Body() unifiedEmployeeData: UnifiedEmployeeInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

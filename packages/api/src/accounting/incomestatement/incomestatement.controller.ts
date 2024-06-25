@@ -37,7 +37,7 @@ export class IncomeStatementController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getIncomeStatements',
     summary: 'List a batch of IncomeStatements',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class IncomeStatementController {
   @ApiCustomResponse(UnifiedIncomeStatementOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getIncomeStatements(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class IncomeStatementController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getIncomeStatement',
     summary: 'Retrieve a IncomeStatement',
     description:
       'Retrieve a incomestatement from any connected Accounting software',
@@ -97,7 +97,7 @@ export class IncomeStatementController {
   @ApiCustomResponse(UnifiedIncomeStatementOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getIncomeStatement(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class IncomeStatementController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addIncomeStatement',
     summary: 'Create a IncomeStatement',
     description:
       'Create a incomestatement in any supported Accounting software',
@@ -127,7 +127,7 @@ export class IncomeStatementController {
   @ApiCustomResponse(UnifiedIncomeStatementOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addIncomeStatement(
     @Body() unifiedIncomeStatementData: UnifiedIncomeStatementInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

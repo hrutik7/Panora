@@ -11,7 +11,7 @@ import {
 import { Response } from 'express';
 import { CrmConnectionsService } from './crm/services/crm.connection.service';
 import { LoggerService } from '@@core/logger/logger.service';
-import { ConnectionsError, throwTypedError } from '@@core/utils/errors';
+import { ConnectionsError } from '@@core/utils/errors';
 import { PrismaService } from '@@core/prisma/prisma.service';
 import {
   ApiBody,
@@ -21,7 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { TicketingConnectionsService } from './ticketing/services/ticketing.connection.service';
-import { ConnectorCategory } from '@panora/shared';
+import { ConnectorCategory, CONNECTORS_METADATA } from '@panora/shared';
 import { AccountingConnectionsService } from './accounting/services/accounting.connection.service';
 import { MarketingAutomationConnectionsService } from './marketingautomation/services/marketingautomation.connection.service';
 import { JwtAuthGuard } from '@@core/auth/guards/jwt-auth.guard';
@@ -154,7 +154,7 @@ export class ConnectionsController {
 
       res.redirect(returnUrl);
 
-      /*if (
+      if (
         CONNECTORS_METADATA[vertical.toLowerCase()][providerName.toLowerCase()]
           .active !== false
       ) {
@@ -166,7 +166,7 @@ export class ConnectionsController {
           linkedUserId,
           projectId,
         );
-      }*/
+      }
     } catch (error) {
       throw error;
     }
@@ -199,7 +199,7 @@ export class ConnectionsController {
   })
   @ApiQuery({ name: 'state', required: true, type: String })
   @ApiBody({ type: BodyDataType })
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @ApiResponse({ status: 201 })
   @Post('apikey/callback')
   async handleApiKeyCallback(
@@ -210,10 +210,7 @@ export class ConnectionsController {
     try {
       const { state } = query;
       if (!state) {
-        throw new ConnectionsError({
-          name: 'API_CALLBACK_STATE_NOT_FOUND_ERROR',
-          message: `No Callback Params found for state, found ${state}`,
-        });
+        throw ReferenceError('State not found');
       }
       const stateData: StateDataType = JSON.parse(decodeURIComponent(state));
       const { projectId, vertical, linkedUserId, providerName, returnUrl } =
@@ -308,7 +305,7 @@ export class ConnectionsController {
 
       res.redirect(returnUrl);
 
-      /*if (
+      if (
         CONNECTORS_METADATA[vertical.toLowerCase()][providerName.toLowerCase()]
           .active !== false
       ) {
@@ -320,14 +317,14 @@ export class ConnectionsController {
           linkedUserId,
           projectId,
         );
-      }*/
+      }
     } catch (error) {
       throw error;
     }
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getConnections',
     summary: 'List Connections',
   })
   @ApiResponse({ status: 200 })

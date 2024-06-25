@@ -34,7 +34,7 @@ export class FolderController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getFolders',
     summary: 'List a batch of Folders',
   })
   @ApiHeader({
@@ -53,7 +53,7 @@ export class FolderController {
   @ApiCustomResponse(UnifiedFolderOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getFolders(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -73,7 +73,7 @@ export class FolderController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getFolder',
     summary: 'Retrieve a Folder',
     description: 'Retrieve a folder from any connected Filestorage software',
   })
@@ -93,7 +93,7 @@ export class FolderController {
   @ApiCustomResponse(UnifiedFolderOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getFolder(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -101,7 +101,7 @@ export class FolderController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addFolder',
     summary: 'Create a Folder',
     description: 'Create a folder in any supported Filestorage software',
   })
@@ -122,7 +122,7 @@ export class FolderController {
   @ApiCustomResponse(UnifiedFolderOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addFolder(
     @Body() unifiedFolderData: UnifiedFolderInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

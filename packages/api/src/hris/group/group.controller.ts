@@ -34,7 +34,7 @@ export class GroupController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getGroups',
     summary: 'List a batch of Groups',
   })
   @ApiHeader({
@@ -52,7 +52,7 @@ export class GroupController {
   @ApiCustomResponse(UnifiedGroupOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getGroups(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -72,7 +72,7 @@ export class GroupController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getGroup',
     summary: 'Retrieve a Group',
     description: 'Retrieve a group from any connected Hris software',
   })
@@ -91,7 +91,7 @@ export class GroupController {
   @ApiCustomResponse(UnifiedGroupOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getGroup(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -99,7 +99,7 @@ export class GroupController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addGroup',
     summary: 'Create a Group',
     description: 'Create a group in any supported Hris software',
   })
@@ -119,7 +119,7 @@ export class GroupController {
   @ApiCustomResponse(UnifiedGroupOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addGroup(
     @Body() unifiedGroupData: UnifiedGroupInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

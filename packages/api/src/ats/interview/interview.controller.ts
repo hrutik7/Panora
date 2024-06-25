@@ -37,7 +37,7 @@ export class InterviewController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getInterviews',
     summary: 'List a batch of Interviews',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class InterviewController {
   @ApiCustomResponse(UnifiedInterviewOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getInterviews(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class InterviewController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getInterview',
     summary: 'Retrieve a Interview',
     description: 'Retrieve a interview from any connected Ats software',
   })
@@ -94,7 +94,7 @@ export class InterviewController {
   @ApiCustomResponse(UnifiedInterviewOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getInterview(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class InterviewController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addInterview',
     summary: 'Create a Interview',
     description: 'Create a interview in any supported Ats software',
   })
@@ -122,7 +122,7 @@ export class InterviewController {
   @ApiCustomResponse(UnifiedInterviewOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addInterview(
     @Body() unifiedInterviewData: UnifiedInterviewInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

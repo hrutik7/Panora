@@ -37,7 +37,7 @@ export class LocationController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getLocations',
     summary: 'List a batch of Locations',
   })
   @ApiHeader({
@@ -55,7 +55,7 @@ export class LocationController {
   @ApiCustomResponse(UnifiedLocationOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getLocations(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -75,7 +75,7 @@ export class LocationController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getLocation',
     summary: 'Retrieve a Location',
     description: 'Retrieve a location from any connected Hris software',
   })
@@ -94,7 +94,7 @@ export class LocationController {
   @ApiCustomResponse(UnifiedLocationOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getLocation(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class LocationController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addLocation',
     summary: 'Create a Location',
     description: 'Create a location in any supported Hris software',
   })
@@ -122,7 +122,7 @@ export class LocationController {
   @ApiCustomResponse(UnifiedLocationOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addLocation(
     @Body() unifiedLocationData: UnifiedLocationInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

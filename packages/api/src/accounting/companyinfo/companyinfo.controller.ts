@@ -37,7 +37,7 @@ export class CompanyInfoController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getCompanyInfos',
     summary: 'List a batch of CompanyInfos',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class CompanyInfoController {
   @ApiCustomResponse(UnifiedCompanyInfoOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getCompanyInfos(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class CompanyInfoController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getCompanyInfo',
     summary: 'Retrieve a CompanyInfo',
     description:
       'Retrieve a companyinfo from any connected Accounting software',
@@ -97,7 +97,7 @@ export class CompanyInfoController {
   @ApiCustomResponse(UnifiedCompanyInfoOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getCompanyInfo(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class CompanyInfoController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addCompanyInfo',
     summary: 'Create a CompanyInfo',
     description: 'Create a companyinfo in any supported Accounting software',
   })
@@ -126,7 +126,7 @@ export class CompanyInfoController {
   @ApiCustomResponse(UnifiedCompanyInfoOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addCompanyInfo(
     @Body() unifiedCompanyInfoData: UnifiedCompanyInfoInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

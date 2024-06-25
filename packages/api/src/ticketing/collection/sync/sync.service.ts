@@ -140,7 +140,6 @@ export class SyncService implements OnModuleInit {
 
       const service: ICollectionService =
         this.serviceRegistry.getService(integrationId);
-      if (!service) return;
       const resp: ApiResponse<OriginalCollectionOutput[]> =
         await service.syncCollections(linkedUserId);
 

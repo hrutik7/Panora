@@ -34,7 +34,7 @@ export class UserController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getMarketingAutomationUsers',
     summary: 'List a batch of Users',
   })
   @ApiHeader({
@@ -53,7 +53,7 @@ export class UserController {
   @ApiCustomResponse(UnifiedUserOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getUsers(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -69,7 +69,7 @@ export class UserController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getMarketingAutomationUser',
     summary: 'Retrieve a User',
     description:
       'Retrieve a user from any connected Marketingautomation software',
@@ -90,7 +90,7 @@ export class UserController {
   @ApiCustomResponse(UnifiedUserOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getUser(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -98,7 +98,7 @@ export class UserController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addMarketingAutomationUser',
     summary: 'Create a User',
     description: 'Create a user in any supported Marketingautomation software',
   })
@@ -119,7 +119,7 @@ export class UserController {
   @ApiCustomResponse(UnifiedUserOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addUser(
     @Body() unifiedUserData: UnifiedUserInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

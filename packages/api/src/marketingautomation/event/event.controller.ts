@@ -34,7 +34,7 @@ export class EventController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getMarketingAutomationEvents',
     summary: 'List a batch of Events',
   })
   @ApiHeader({
@@ -53,7 +53,7 @@ export class EventController {
   @ApiCustomResponse(UnifiedEventOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getEvents(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -73,7 +73,7 @@ export class EventController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getEvent',
     summary: 'Retrieve a Event',
     description:
       'Retrieve a event from any connected Marketingautomation software',
@@ -94,7 +94,7 @@ export class EventController {
   @ApiCustomResponse(UnifiedEventOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getEvent(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class EventController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addEvent',
     summary: 'Create a Event',
     description: 'Create a event in any supported Marketingautomation software',
   })
@@ -123,7 +123,7 @@ export class EventController {
   @ApiCustomResponse(UnifiedEventOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addEvent(
     @Body() unifiedEventData: UnifiedEventInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

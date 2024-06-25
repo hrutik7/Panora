@@ -37,7 +37,7 @@ export class BalanceSheetController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getBalanceSheets',
     summary: 'List a batch of BalanceSheets',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class BalanceSheetController {
   @ApiCustomResponse(UnifiedBalanceSheetOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getBalanceSheets(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class BalanceSheetController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getBalanceSheet',
     summary: 'Retrieve a BalanceSheet',
     description:
       'Retrieve a balancesheet from any connected Accounting software',
@@ -97,7 +97,7 @@ export class BalanceSheetController {
   @ApiCustomResponse(UnifiedBalanceSheetOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getBalanceSheet(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class BalanceSheetController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addBalanceSheet',
     summary: 'Create a BalanceSheet',
     description: 'Create a balancesheet in any supported Accounting software',
   })
@@ -126,7 +126,7 @@ export class BalanceSheetController {
   @ApiCustomResponse(UnifiedBalanceSheetOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addBalanceSheet(
     @Body() unifiedBalanceSheetData: UnifiedBalanceSheetInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

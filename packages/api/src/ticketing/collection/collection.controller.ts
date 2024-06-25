@@ -44,7 +44,7 @@ export class CollectionController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getCollections',
     summary: 'List a batch of Collections',
   })
   @ApiHeader({
@@ -57,7 +57,7 @@ export class CollectionController {
   @UseGuards(ApiKeyAuthGuard)
   @Get()
   @UsePipes(new ValidationPipe({ transform: true, disableErrorMessages: true }))
-  async list(
+  async getCollections(
     @Headers('x-connection-token') connection_token: string,
     @Query() query: FetchObjectsQueryDto,
   ) {
@@ -80,7 +80,7 @@ export class CollectionController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getCollection',
     summary: 'Retrieve a Collection',
     description: 'Retrieve a collection from any connected Ticketing software',
   })
@@ -100,7 +100,7 @@ export class CollectionController {
   @ApiCustomResponse(UnifiedCollectionOutput)
   @UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getCollection(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {

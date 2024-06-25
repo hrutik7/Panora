@@ -37,7 +37,7 @@ export class AddressController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getAddresss',
     summary: 'List a batch of Addresss',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class AddressController {
   @ApiCustomResponse(UnifiedAddressOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getAddresss(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class AddressController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getAddress',
     summary: 'Retrieve a Address',
     description: 'Retrieve a address from any connected Accounting software',
   })
@@ -96,7 +96,7 @@ export class AddressController {
   @ApiCustomResponse(UnifiedAddressOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getAddress(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -104,7 +104,7 @@ export class AddressController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addAddress',
     summary: 'Create a Address',
     description: 'Create a address in any supported Accounting software',
   })
@@ -125,7 +125,7 @@ export class AddressController {
   @ApiCustomResponse(UnifiedAddressOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addAddress(
     @Body() unifiedAddressData: UnifiedAddressInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

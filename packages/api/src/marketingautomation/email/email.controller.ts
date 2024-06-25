@@ -34,7 +34,7 @@ export class EmailController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getEmails',
     summary: 'List a batch of Emails',
   })
   @ApiHeader({
@@ -53,7 +53,7 @@ export class EmailController {
   @ApiCustomResponse(UnifiedEmailOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getEmails(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -73,7 +73,7 @@ export class EmailController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getEmail',
     summary: 'Retrieve a Email',
     description:
       'Retrieve a email from any connected Marketingautomation software',
@@ -94,7 +94,7 @@ export class EmailController {
   @ApiCustomResponse(UnifiedEmailOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getEmail(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -102,7 +102,7 @@ export class EmailController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addEmail',
     summary: 'Create a Email',
     description: 'Create a email in any supported Marketingautomation software',
   })
@@ -123,7 +123,7 @@ export class EmailController {
   @ApiCustomResponse(UnifiedEmailOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addEmail(
     @Body() unifiedEmailData: UnifiedEmailInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

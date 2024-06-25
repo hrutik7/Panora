@@ -37,7 +37,7 @@ export class TrackingCategoryController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getTrackingCategorys',
     summary: 'List a batch of TrackingCategorys',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class TrackingCategoryController {
   @ApiCustomResponse(UnifiedTrackingCategoryOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getTrackingCategorys(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class TrackingCategoryController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getTrackingCategory',
     summary: 'Retrieve a TrackingCategory',
     description:
       'Retrieve a trackingcategory from any connected Accounting software',
@@ -97,7 +97,7 @@ export class TrackingCategoryController {
   @ApiCustomResponse(UnifiedTrackingCategoryOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getTrackingCategory(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class TrackingCategoryController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addTrackingCategory',
     summary: 'Create a TrackingCategory',
     description:
       'Create a trackingcategory in any supported Accounting software',
@@ -127,7 +127,7 @@ export class TrackingCategoryController {
   @ApiCustomResponse(UnifiedTrackingCategoryOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addTrackingCategory(
     @Body() unifiedTrackingCategoryData: UnifiedTrackingCategoryInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,

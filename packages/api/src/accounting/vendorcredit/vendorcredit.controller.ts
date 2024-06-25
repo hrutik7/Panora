@@ -37,7 +37,7 @@ export class VendorCreditController {
   }
 
   @ApiOperation({
-    operationId: 'list',
+    operationId: 'getVendorCredits',
     summary: 'List a batch of VendorCredits',
   })
   @ApiHeader({
@@ -56,7 +56,7 @@ export class VendorCreditController {
   @ApiCustomResponse(UnifiedVendorCreditOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get()
-  async list(
+  async getVendorCredits(
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -76,7 +76,7 @@ export class VendorCreditController {
   }
 
   @ApiOperation({
-    operationId: 'retrieve',
+    operationId: 'getVendorCredit',
     summary: 'Retrieve a VendorCredit',
     description:
       'Retrieve a vendorcredit from any connected Accounting software',
@@ -97,7 +97,7 @@ export class VendorCreditController {
   @ApiCustomResponse(UnifiedVendorCreditOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Get(':id')
-  retrieve(
+  getVendorCredit(
     @Param('id') id: string,
     @Query('remote_data') remote_data?: boolean,
   ) {
@@ -105,7 +105,7 @@ export class VendorCreditController {
   }
 
   @ApiOperation({
-    operationId: 'create',
+    operationId: 'addVendorCredit',
     summary: 'Create a VendorCredit',
     description: 'Create a vendorcredit in any supported Accounting software',
   })
@@ -126,7 +126,7 @@ export class VendorCreditController {
   @ApiCustomResponse(UnifiedVendorCreditOutput)
   //@UseGuards(ApiKeyAuthGuard)
   @Post()
-  async create(
+  async addVendorCredit(
     @Body() unifiedVendorCreditData: UnifiedVendorCreditInput,
     @Headers('x-connection-token') connection_token: string,
     @Query('remote_data') remote_data?: boolean,
